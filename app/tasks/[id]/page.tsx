@@ -86,15 +86,30 @@ export default async function TaskDetailPage({ params }: TaskDetailPageProps) {
 
                 {/* Roadmap / Instructions */}
                 {task.roadmap && (
-                    <div className="space-y-4">
-                        <h3 className="text-xl font-semibold px-2 flex items-center gap-2">
-                            <Lightbulb className="w-5 h-5 text-yellow-500" />
-                            Roadmap & Instructions
-                        </h3>
-                        <div className="p-6 rounded-2xl border bg-card/50 prose prose-sm dark:prose-invert max-w-none">
-                            <pre className="whitespace-pre-wrap font-sans text-sm leading-relaxed">
-                                {task.roadmap}
-                            </pre>
+                    <div className="rounded-2xl border bg-card overflow-hidden">
+                        <div className="bg-muted/40 p-4 border-b flex items-center gap-3">
+                            <div className="p-2 bg-yellow-500 rounded-lg shadow-sm">
+                                <Lightbulb className="w-5 h-5 text-white" />
+                            </div>
+                            <h3 className="text-xl font-bold tracking-tight text-foreground">
+                                Roadmap & Instructions
+                            </h3>
+                        </div>
+                        <div className="p-6">
+                            <div className="prose prose-sm dark:prose-invert max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-strong:font-bold prose-strong:text-foreground">
+                                <ReactMarkdown
+                                    components={{
+                                        p: ({ node, ...props }) => <p className="mb-4 last:mb-0 leading-relaxed" {...props} />,
+                                        ul: ({ node, ...props }) => <ul className="list-disc pl-4 space-y-2 mb-4" {...props} />,
+                                        li: ({ node, ...props }) => <li className="pl-1" {...props} />,
+                                        h1: ({ node, ...props }) => <h1 className="text-2xl mt-8 mb-4 border-b pb-2" {...props} />,
+                                        h2: ({ node, ...props }) => <h2 className="text-xl mt-6 mb-3" {...props} />,
+                                        h3: ({ node, ...props }) => <h3 className="text-lg mt-6 mb-3" {...props} />
+                                    }}
+                                >
+                                    {task.roadmap}
+                                </ReactMarkdown>
+                            </div>
                         </div>
                     </div>
                 )}
