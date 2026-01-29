@@ -2,26 +2,12 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { TaskInput } from "@/components/TaskInput";
-import { TaskList } from "@/components/TaskList";
+import { TaskList, type TaskWithSubtasks } from "@/components/TaskList";
 import { Loader2 } from "lucide-react";
 // import type { Task } from "@prisma/client";
 
-interface Task {
-  id: string;
-  title: string;
-  description: string | null;
-  status: "TODO" | "IN_PROGRESS" | "DONE";
-  priority: "LOW" | "MEDIUM" | "HIGH";
-  dueDate: Date | string | null;
-  createdAt: Date | string;
-  updatedAt: Date | string;
-  parentId: string | null;
-  subtasks?: Task[];
-  aiSuggestion: string | null;
-}
-
 export default function Home() {
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<TaskWithSubtasks[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchTasks = useCallback(async () => {

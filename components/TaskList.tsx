@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { formatDistanceToNow } from "date-fns";
 
-interface Task {
+export interface Task {
     id: string;
     title: string;
     description: string | null;
@@ -21,7 +21,7 @@ interface Task {
     aiSuggestion: string | null;
 }
 
-interface TaskWithSubtasks extends Task {
+export interface TaskWithSubtasks extends Task {
     subtasks?: TaskWithSubtasks[];
 }
 
