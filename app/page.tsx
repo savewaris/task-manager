@@ -17,6 +17,7 @@ interface Task {
   updatedAt: Date | string;
   parentId: string | null;
   subtasks?: Task[];
+  aiSuggestion: string | null;
 }
 
 export default function Home() {
