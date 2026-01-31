@@ -7,6 +7,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Task {
+  id           String     @id @default(uuid())
+  title        String
+  description  String?
+  status       TaskStatus @default(TODO)
+  priority     Priority   @default(MEDIUM)
+  dueDate      DateTime?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  aiSuggestion String?
+  roadmap      String?
+}
+
 enum TaskStatus {
   TODO
   IN_PROGRESS
@@ -17,18 +30,4 @@ enum Priority {
   LOW
   MEDIUM
   HIGH
-}
-
-model Task {
-  id          String     @id @default(uuid())
-  title       String
-  description String?
-  status      TaskStatus @default(TODO)
-  priority    Priority   @default(MEDIUM)
-  dueDate     DateTime?
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  
-  aiSuggestion String?   // AI-generated tip or guideline
-  roadmap      String?   // Detailed step-by-step instructions (Markdown)
 }
