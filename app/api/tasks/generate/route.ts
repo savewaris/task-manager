@@ -102,8 +102,16 @@ export async function POST(request: Request) {
             return NextResponse.json(task);
         }
 
-    } catch (error) {
+    } catch (error: any) {
         console.error("Error generating task:", error);
+
+        if (error.message.includes("GEMINI_API_KEY")) {
+            return NextResponse.json(
+                { error: "Configuration Error: GEMINI_API_KEY is missing on server." },
+                { status: 500 }
+            );
+        }
+
         return NextResponse.json(
             { error: "Failed to generate task" },
             { status: 500 }

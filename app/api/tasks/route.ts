@@ -10,6 +10,10 @@ export async function GET() {
         return NextResponse.json(tasks);
     } catch (error) {
         console.error("Error fetching tasks:", error);
+
+        // Log basic connection info for debugging
+        console.error("Database Connection Status:", process.env.DATABASE_URL ? "URL Present" : "URL Missing");
+
         return NextResponse.json(
             { error: "Failed to fetch tasks" },
             { status: 500 }
